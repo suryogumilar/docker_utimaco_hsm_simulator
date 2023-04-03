@@ -1,0 +1,19 @@
+FROM almalinux:9.1
+
+RUN dnf --assumeyes install epel-release && dnf --assumeyes update && \
+    dnf --assumeyes upgrade
+RUN dnf --assumeyes install initscripts net-tools nano unzip wget iputils \
+    telnet openssl java-11-openjdk-devel.x86_64 java-17-openjdk-devel.x86_64 \
+    diffutils.x86_64 ncurses-devel nfs-utils maven ncurses
+
+## for simulator
+RUN dnf --assumeyes install glibc.i686 glibc-devel.i686 libstdc++.i686
+RUN dnf clean all
+RUN mkdir /installer && mkdir -p /opt/utimaco/simulator && ln -s /opt/utimaco/simulator \
+    /opt/utimaco/sim
+COPY ./installer/* /opt/utimaco/simulator
+RUN cd /opt/utimaco/simulator && chmod 755 ./unziper_dir.sh && ./unziper_dir.sh
+
+
+
+
