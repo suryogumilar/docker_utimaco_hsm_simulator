@@ -11,7 +11,7 @@ how to run
 ```
 docker run -it \
   --name hsm_simulator \
-  -p 3000:3000 -p 3001:3001 \
+  -p 3000:3000 -p 3001:3001 -p 6070:6070 \
   --network=wfNetwork \
   local_utimaco_sim:0.0.1 bash
 ```
